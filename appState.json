@@ -22,7 +22,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "testgcpindunil/function.js",
-        "code": "exports.handler = function(request, response) {\n    console.log(\"test round C scheduler 1\")\n    response.send({\"message\": \"Successfully executed\"});\n}",
+        "code": "exports.handler = function(request, response) {\n    console.log(\"test round C scheduler 1\")\n    response.send({\"message\": \"Successfully executed S1\"});\n}",
         "config": {
           "runtime": "nodejs8",
           "timeout": 60,
@@ -35,7 +35,7 @@
             "resourceName": "scheduler-trigger",
             "config": {
               "type": "",
-              "schedulePattern": "38 17 * * *",
+              "schedulePattern": "48 17 * * *",
               "jobId": "job1",
               "timezone": "Asia/Colombo"
             }
@@ -99,7 +99,7 @@
     "projectRegion": "us-east1",
     "platform": "GCP",
     "platformRegions": {},
-    "lastSave": 1567080238885
+    "lastSave": 1567081023283
   },
   "VCS_STATE": {
     "provider": "GitHub",
