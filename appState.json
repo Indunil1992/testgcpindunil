@@ -8,7 +8,8 @@
         "type": "DIRECTORY",
         "isDirectory": true,
         "children": [
-          "6dc6ba97-7050-4f2c-af33-4f5d1d34dfd8"
+          "6dc6ba97-7050-4f2c-af33-4f5d1d34dfd8",
+          "15101b15-9943-41ee-a7d5-ffb305d16e14"
         ],
         "isRemovable": false,
         "filePath": "testgcpindunil"
@@ -22,7 +23,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "testgcpindunil/function.js",
-        "code": "exports.handler = function(request, response) {\n    console.log(\"test round C scheduler 1\")\n    response.send({\"message\": \"Successfully executed S1\"});\n}",
+        "code": "let google = require('googleapis').google;\nlet _auth = require('./Authorizer');\nconst pubsub = google.pubsub('v1');\n\nexports.handler = function (request, response) {\n    pubsub.projects.topics.subscriptions.list({\n        topic: `projects/${process.env.GCP_PROJECT}/topics/cloud-builds`,\n        pageSize: 10\n    })\n        .then(response => {\n            console.log(response.data); \n            console.log(\"succccccssss\") // successful response\n            /*\n            response.data = {\n                \"subscriptions\": [\n                    \"projects/<project>/subscriptions/<subscription-1>\",\n                    \"projects/<project>/subscriptions/<subscription-2>\",\n                    ...\n                ]\n            }\n            */\n        })\n        .catch(err => {\n            console.log(err, err.stack); \n             console.log(\"errorrrr\")// an error occurred\n        });\n    \n    response.send({ \"message\": \"Successfully executed S1\" });\n}",
         "config": {
           "runtime": "nodejs8",
           "timeout": 60,
@@ -40,7 +41,23 @@
               "timezone": "Asia/Colombo"
             }
           }
-        ]
+        ],
+        "testCases": {
+          "9e1aa444-d933-4819-ae72-548b2ce47a46": {
+            "id": "9e1aa444-d933-4819-ae72-548b2ce47a46",
+            "name": "Test event",
+            "functionId": "6dc6ba97-7050-4f2c-af33-4f5d1d34dfd8",
+            "event": "{\"key1\": \"value1\", \"key2\": \"value2\", \"key3\": \"value3\"}",
+            "eventTemplate": "hello-world"
+          },
+          "10fb0583-a467-42bd-a3c7-2964f8c2fca6": {
+            "id": "10fb0583-a467-42bd-a3c7-2964f8c2fca6",
+            "name": "Test event",
+            "functionId": "6dc6ba97-7050-4f2c-af33-4f5d1d34dfd8",
+            "event": "{\r\n    \"key1\": \"value1\",\r\n    \"key2\": \"value2\",\r\n    \"key3\": \"value3\"\r\n}",
+            "eventTemplate": "hello-world"
+          }
+        }
       },
       "f62ddda7-611a-4c0d-8afc-b9cc606e1c8d": {
         "id": "f62ddda7-611a-4c0d-8afc-b9cc606e1c8d",
@@ -63,6 +80,17 @@
         "isRemovable": false,
         "filePath": "main.py",
         "code": "# This file is used to register all your cloud functions in GCP.\n# DO NOT EDIT/DELETE THIS, UNLESS YOU KNOW WHAT YOU ARE DOING.\n\n"
+      },
+      "15101b15-9943-41ee-a7d5-ffb305d16e14": {
+        "id": "15101b15-9943-41ee-a7d5-ffb305d16e14",
+        "parent": "ed785b71-e2cf-43a3-bf73-0f36cf075daa",
+        "name": "Authorizer.js",
+        "type": "JS_FILE",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "testgcpindunil/Authorizer.js",
+        "code": "const google = require(\"googleapis\").google;\n\ngoogle.options({auth: new google.auth.Compute()});"
       }
     },
     "deletedFiles": [],
@@ -81,15 +109,43 @@
         "name": "scheduler-trigger",
         "type": "scheduler-trigger",
         "config": {}
+      },
+      "pubsubcloudBuilds": {
+        "name": "pubsubcloudBuilds",
+        "type": "pubsub",
+        "config": {
+          "mode": 1,
+          "topic": {
+            "name": "cloud-builds",
+            "subscriptions": []
+          }
+        }
       }
     },
     "customTemplate": {
       "dialect": null,
       "definitions": null
     },
-    "envVariables": [],
+    "envVariables": [
+      {
+        "lambdaId": "all",
+        "varKey": "AWS_REGION",
+        "varValue": null,
+        "shouldPersist": false,
+        "displayOnly": false,
+        "editable": false
+      }
+    ],
     "packageJSON": {
-      "dependencies": {}
+      "dependencies": {
+        "googleapis": {
+          "name": "googleapis",
+          "language": "javascript",
+          "version": "29.0.0",
+          "dev": false,
+          "notRemovable": false
+        }
+      }
     }
   },
   "PROJECT_META": {
@@ -98,8 +154,10 @@
     "projectVersion": "1.0.0",
     "projectRegion": "us-east1",
     "platform": "GCP",
-    "platformRegions": {},
-    "lastSave": 1567081023283
+    "platformRegions": {
+      "AWS": "us-east-1"
+    },
+    "lastSave": 1567082633470
   },
   "VCS_STATE": {
     "provider": "GitHub",
