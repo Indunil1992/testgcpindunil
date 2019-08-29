@@ -1,0 +1,111 @@
+{
+  "EDITOR_STATE": {
+    "allProjectFiles": {
+      "ed785b71-e2cf-43a3-bf73-0f36cf075daa": {
+        "id": "ed785b71-e2cf-43a3-bf73-0f36cf075daa",
+        "parent": null,
+        "name": "testgcpindunil",
+        "type": "DIRECTORY",
+        "isDirectory": true,
+        "children": [
+          "6dc6ba97-7050-4f2c-af33-4f5d1d34dfd8"
+        ],
+        "isRemovable": false,
+        "filePath": "testgcpindunil"
+      },
+      "6dc6ba97-7050-4f2c-af33-4f5d1d34dfd8": {
+        "id": "6dc6ba97-7050-4f2c-af33-4f5d1d34dfd8",
+        "parent": "ed785b71-e2cf-43a3-bf73-0f36cf075daa",
+        "name": "function.js",
+        "type": "JS_LAMBDA",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "testgcpindunil/function.js",
+        "code": "exports.handler = function(request, response) {\n    console.log(\"test round C scheduler 1\")\n    response.send({\"message\": \"Successfully executed\"});\n}",
+        "config": {
+          "runtime": "nodejs8",
+          "timeout": 60,
+          "memory": 128,
+          "triggerType": 0,
+          "handler": "handler"
+        },
+        "triggers": [
+          {
+            "resourceName": "scheduler-trigger",
+            "config": {
+              "type": "",
+              "schedulePattern": "13 17 * * *",
+              "jobId": "job1",
+              "timezone": "Asia/Colombo"
+            }
+          }
+        ]
+      },
+      "f62ddda7-611a-4c0d-8afc-b9cc606e1c8d": {
+        "id": "f62ddda7-611a-4c0d-8afc-b9cc606e1c8d",
+        "parent": null,
+        "name": "index.js",
+        "type": "JS_FILE",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": false,
+        "filePath": "index.js",
+        "code": "// This file is used to register all your cloud functions in GCP.\n// DO NOT EDIT/DELETE THIS, UNLESS YOU KNOW WHAT YOU ARE DOING.\n\nexports.testgcpindunilfunction = require(\"./testgcpindunil/function.js\").handler;"
+      },
+      "6bb34842-6351-454d-9345-da2064a56f4d": {
+        "id": "6bb34842-6351-454d-9345-da2064a56f4d",
+        "parent": null,
+        "name": "main.py",
+        "type": "PYTHON_FILE",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": false,
+        "filePath": "main.py",
+        "code": "# This file is used to register all your cloud functions in GCP.\n# DO NOT EDIT/DELETE THIS, UNLESS YOU KNOW WHAT YOU ARE DOING.\n\n"
+      }
+    },
+    "deletedFiles": [],
+    "rootNode": "ed785b71-e2cf-43a3-bf73-0f36cf075daa",
+    "openFiles": [
+      "6dc6ba97-7050-4f2c-af33-4f5d1d34dfd8"
+    ],
+    "currentFileId": "6dc6ba97-7050-4f2c-af33-4f5d1d34dfd8",
+    "resources": {
+      "http-trigger": {
+        "name": "http-trigger",
+        "type": "http-trigger",
+        "config": {}
+      },
+      "scheduler-trigger": {
+        "name": "scheduler-trigger",
+        "type": "scheduler-trigger",
+        "config": {}
+      }
+    },
+    "customTemplate": {
+      "dialect": null,
+      "definitions": null
+    },
+    "envVariables": [],
+    "packageJSON": {
+      "dependencies": {}
+    }
+  },
+  "PROJECT_META": {
+    "projectName": "testgcpindunil",
+    "projectDescription": "",
+    "projectVersion": "1.0.0",
+    "projectRegion": "us-east1",
+    "platform": "GCP",
+    "platformRegions": {},
+    "lastSave": 1567078935852
+  },
+  "VCS_STATE": {
+    "provider": "GitHub",
+    "repo": {
+      "name": "testgcpindunil",
+      "url": "https://github.com/Indunil1992/testgcpindunil"
+    }
+  }
+}
